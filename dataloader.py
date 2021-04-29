@@ -240,8 +240,8 @@ class NiftiSegmentationLabelList(NiftiImageList):
     path = self.path
     return NiftiImage(t, obj, path)
 
-get_y_fn = lambda x: os.path.join(*x[0].as_posix().split('_')[:-1],'seg.nii').replace('\\','_')
-
+#get_y_fn = lambda x: os.path.join(*x[0].as_posix().split('_')[:-1],'seg.nii').replace('\\','_')
+get_y_fn = lambda x: x[0].parent/Path(x[0].as_posix().split(os.sep)[-2]+'_seg.nii')
 subregion = np.array(['WT', 'TC', 'ET']) 
 
 def crop_3d(item:NiftiImage, do_resolve=False, *args, lowerind:Tuple, upperind:Tuple, **kwargs):
